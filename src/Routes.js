@@ -13,6 +13,13 @@ import Login from "./Login"
 import Profile from "./Profile"
 
 
+// To figure out how to handle lack of token to redirect to login page
+
+/** Routes: Component that performs client-side routing for Jobly
+ *    - Holds props of token
+ *    - Used in App
+ *    - Uses Home, Companies, Company, Jobs, Login, and Profile Components */
+
 function Routes({ token, username, updateToken }) {
   return (
     <Switch>

@@ -1,17 +1,35 @@
-import React from 'react';
+import React, {useParams, useEffect} from 'react';
 import './Company.css';
 
-// import CompanyCard from "./CompanyCard"
-// import Search from "./Search"
+import JobCard from "./JobCard"
+import JoblyApi from "./JoblyApi"
 
-function Companies({ token }) {
+
+/** Company: Component renders profile page of single company, including company name, bio, and list of its job openings
+ *    - Holds props of token
+ *    - Used in Routes
+ *    - Uses JobCard component */
+
+function Company({ token }) {
+
+  const {name} = useParams();
+
+  let companyData;
+
+  useEffect(() => {
+    async function getData() {
+      let resp = await JoblyApi.request()
+    }
+  }, []);
+
   return (
-    // <div>
-    //   Companies
-    //   <Search />
-    //   <CompanyCard />
-    //   <CompanyCard />
-    // </div>
+    <div>
+      <p>
+        {companyData}
+      </p>
+      <JobCard />
+      <JobCard />
+    </div>
   )
 }
 

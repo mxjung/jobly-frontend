@@ -6,6 +6,14 @@ import Routes from "./Routes";
 import Navigation from "./Navigation";
 
 
+/** App: Component that renders home page with description of Jobly and depending 
+ *  on token status, either a Login button (if it doesn't exist), or a 'welcome back' message
+ *    - Holds state of token and username
+ *    - Used in Index component
+ *    - Uses Routes and Navigation components
+ */
+
+
 function App() {
   const [token, setToken] = useState(null);
   const [username, setUsername] = useState(null);
