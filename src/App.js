@@ -1,4 +1,4 @@
-import {React, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import { BrowserRouter } from "react-router-dom";
 import jwt from "jsonwebtoken"
 
@@ -22,12 +22,12 @@ function App() {
     setToken(newToken);
   }
   
-  useEffect(() => {
-    let payload = jwt.decode(token);
-    let updatedUsername = payload.username;
+  // useEffect(() => {
+  //   let payload = jwt.decode(token);
+  //   let updatedUsername = payload.username;
 
-    setUsername(updatedUsername);
-  }, [token]);
+  //   setUsername(updatedUsername);
+  // }, [token]);
   
 
   return (

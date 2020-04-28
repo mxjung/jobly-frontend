@@ -15,7 +15,8 @@ function Alert({ msg, type }) {
 
   return (
     <div>
-     {msg}
+      Message
+     {/* {msg} */}
     </div>
   )
 }

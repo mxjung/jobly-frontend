@@ -10,10 +10,15 @@ import Search from "./Search"
  *    - Uses Search and CompanyCard components */
 
 function Companies({ token }) {
+
+  function updateSearchTerm() {
+    return "hello world";
+  }
+
   return (
     <div>
       Companies
-      <Search />
+      <Search updateSearchTerm={updateSearchTerm}/>
       <CompanyCard />
       <CompanyCard />
     </div>

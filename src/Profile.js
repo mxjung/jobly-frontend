@@ -20,6 +20,9 @@ function Profile({ token, username }) {
   // re-render the page? or just don't clear the form
   // render alert
 
+  let msg = "placeholder alert";
+  let type = "placeholder type";
+
   return (
     <div>
       Profile

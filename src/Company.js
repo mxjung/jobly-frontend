@@ -16,19 +16,25 @@ function Company({ token }) {
 
   let companyData;
 
-  useEffect(() => {
-    async function getData() {
-      let resp = await JoblyApi.request()
-    }
-  }, []);
+  // useEffect(() => {
+  //   async function getData() {
+  //     let resp = await JoblyApi.request()
+  //   }
+  // }, []);
+
+  function updateJobsList() {
+    return "hello world";
+  }
+
+  let jobData = {job: "hello world"};
 
   return (
     <div>
       <p>
         {companyData}
       </p>
-      <JobCard />
-      <JobCard />
+      {/* To map through jobsList (returned from getData useEffect) to render each job object via JobCard */}
+      <JobCard updateJobsList={updateJobsList} jobData={jobData}/>
     </div>
   )
 }

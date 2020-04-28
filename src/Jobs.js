@@ -18,17 +18,27 @@ function Jobs({ token }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [jobsList, setjobsList] = useState([]);
   
-  // updateSearchTerm
-  // updateJobsList
+  function updateSearchTerm() {
+    return "hello world";
+  }
+  
+  function updateJobsList() {
+    return "hello world";
+  }
 
+  function updateJobsList() {
+    return "hello world";
+  }
+
+  let jobData = {job: "hello world"};
 
   return (
     <div>
       Jobs
       <Search updateSearchTerm={updateSearchTerm}/>
       {/* map through jobsList to render each JobCard */}
-      <JobCard updateJobsList={updateJobsList}/>
-      <JobCard updateJobsList={updateJobsList}/>
+      <JobCard updateJobsList={updateJobsList} jobData={jobData}/>
+      <JobCard updateJobsList={updateJobsList} jobData={jobData}/>
     </div>
   )
 }
