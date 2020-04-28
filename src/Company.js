@@ -28,6 +28,8 @@ function Company({ token }) {
 
   let jobData = {job: "hello world"};
 
+  // if job is not there, loading
+
   return (
     <div>
       <p>

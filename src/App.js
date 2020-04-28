@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { BrowserRouter } from "react-router-dom";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 import Routes from "./Routes";
 import Navigation from "./Navigation";

@@ -26,9 +26,6 @@ function Jobs({ token }) {
     return "hello world";
   }
 
-  function updateJobsList() {
-    return "hello world";
-  }
 
   let jobData = {job: "hello world"};
 
