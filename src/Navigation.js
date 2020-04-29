@@ -11,10 +11,8 @@ import { NavLink } from "react-router-dom";
 
 function Navigation({ token }) {
 
-  // function returnCorrectNav to check if token exists, if it does, it returns:
-  
+  // function that returns correct navbar based on value of token
   function returnCorrectNav() {
-    
     if (token !== null) {
       console.log("made into not null token")
       return (

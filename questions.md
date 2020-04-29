@@ -1,0 +1,1 @@
+1. State of applied jobs (where would state exist). Given that allied status on each job is shared amongst jobs and companies component. 

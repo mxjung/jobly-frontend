@@ -8,7 +8,7 @@ import './Search.css';
  *    - Used in Companies and Jobs components
  */
 
-function Search({ updateSearchTerm }) {
+function Search({ setSearchTerm }) {
 
   const [formData, setFormData] = useState("");
 
@@ -17,7 +17,7 @@ function Search({ updateSearchTerm }) {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    updateSearchTerm(formData);
+    setSearchTerm(formData);
     setFormData("");
   };
 
@@ -29,7 +29,6 @@ function Search({ updateSearchTerm }) {
   };
 
   /** render form */
-
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="search">Search:</label>

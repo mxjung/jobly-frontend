@@ -13,13 +13,8 @@ import Search from "./Search"
 
 function Companies({ token }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [companiesList, setCompaniesList] = useState([]);
+  const [companiesList, setCompaniesList] = useState(null);
   
-  // Function passed into Search Component to update searchTerm
-  function updateSearchTerm(formData) {
-    setSearchTerm(formData);
-  }
-
   // useEffect that will make API call for filtered companies upon change in searchTerm
   useEffect(() => {
     async function fetchCompanies () {
@@ -31,13 +26,17 @@ function Companies({ token }) {
 
   return (
     <div>
-      Companies
-      <Search updateSearchTerm={updateSearchTerm}/>
-      {companiesList.map(companyData => (
-        <CompanyCard key={companyData.handle} companyData={companyData}/>
-      ))}
+      {companiesList === null ? <p>Loading...</p> : (
+      <div>
+        Companies
+        <Search setSearchTerm={setSearchTerm}/>
+        {companiesList.map(companyData => (
+          <CompanyCard key={companyData.handle} companyData={companyData}/>
+        ))}
+      </div>
+      )}
     </div>
-  )
+    )
 }
 
 export default Companies;
