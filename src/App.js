@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import jwt from "jsonwebtoken";
 
 import Routes from "./Routes";
 import Navigation from "./Navigation";
+import TokenContext from "./tokenContext";
 
 
 /** App: Component that renders home page with description of Jobly and depending 
@@ -14,30 +15,31 @@ import Navigation from "./Navigation";
  */
 
 function App() {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [username, setUsername] = useState(null);
 
-  const updateToken = (newToken) => {
-    setToken(newToken);
-  }
+  useEffect(() => {
+    if (token !== "null") {
+      localStorage.setItem('token', token)
   
-  // useEffect(() => {
-  //   let payload = jwt.decode(token);
-  //   let updatedUsername = payload.username;
+      let payload = jwt.decode(token);
+      let updatedUsername = payload.username;
+      setUsername(updatedUsername);
+    }
+  }, [token]);
 
-  //   setUsername(updatedUsername);
-  // }, [token]);
-  
 
-  return (
-    <div>
+return (
+  <div>
+    <TokenContext.Provider value={{ token, setToken }}>
       <BrowserRouter>
-        <Navigation token={token} />
+        <Navigation />
         <div className="container">
-          <Routes token={token} username={username} updateToken={updateToken}/>
+          <Routes username={username} />
         </div>
       </BrowserRouter>
-    </div>
+    </TokenContext.Provider>
+    </div >
   );
 }
 

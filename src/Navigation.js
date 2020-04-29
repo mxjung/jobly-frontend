@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './Navigation.css';
 import { NavLink } from "react-router-dom";
-
+import TokenContext from "./tokenContext";
 
 
 /** Navigation: Component that renders one of two navigation bars based on if a token exists
@@ -9,7 +9,9 @@ import { NavLink } from "react-router-dom";
  *    - Used in App
  * */
 
-function Navigation({ token }) {
+function Navigation() {
+
+  const { token } = useContext(TokenContext);
 
   // function that returns correct navbar based on value of token
   function returnCorrectNav() {

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import './Alert.css';
 
 
@@ -7,16 +7,24 @@ import './Alert.css';
  *    - Used in Login, Profile components
  */
 
-function Alert({ msg, type }) {
+function Alert({ msg, type, setErrMsg }) {
 
-  // useEffect to setTimeout to unmount after 1 second (here or in Profile?)
+  const [visible, setVisible] = useState(true);
 
-  // come back for coloring via bootstrap
+  useEffect(() => {
+    setTimeout(() => {
+      setVisible(false);
+      setErrMsg("");
+    }, 3000);
+  }, []);
 
   return (
     <div>
-      Message
-     {/* {msg} */}
+      {visible ? (
+        <div className={`alert alert-${type}`}>
+          {msg.map((m,idx) => <p key={idx}>{m}</p>)}
+        </div>
+      ) : null}
     </div>
   )
 }
