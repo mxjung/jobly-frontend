@@ -13,7 +13,6 @@ import Navigation from "./Navigation";
  *    - Uses Routes and Navigation components
  */
 
-
 function App() {
   const [token, setToken] = useState(null);
   const [username, setUsername] = useState(null);

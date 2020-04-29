@@ -26,19 +26,19 @@ function Routes({ token, username, updateToken }) {
       <Route exact path="/">
         <Home token={token}/>
       </Route>
-      <Route path="/companies">
+      <Route exact path="/companies">
         <Companies token={token} />
       </Route>
-      <Route path="/companies/:name">
+      <Route exact path="/companies/:handle">
         <Company token={token} />
       </Route>
-      <Route path="/jobs">
+      <Route exact path="/jobs">
         <Jobs token={token} />
       </Route>
-      <Route path="/login">
+      <Route exact path="/login">
         <Login updateToken={updateToken}/>
       </Route>
-      <Route path="/profile">
+      <Route exact path="/profile">
         <Profile token={token} username={username}/>
       </Route>
       <Redirect to="/" />

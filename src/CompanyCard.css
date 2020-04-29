@@ -1,0 +1,11 @@
+.company-card a {
+  text-decoration: none;
+}
+
+.company-card {
+  width: 400px;
+  height: 200px;
+  background-color: lightblue;
+  padding: 2rem;
+  margin: 10px;
+}

@@ -12,38 +12,43 @@ import { NavLink } from "react-router-dom";
 function Navigation({ token }) {
 
   // function returnCorrectNav to check if token exists, if it does, it returns:
-
+  
   function returnCorrectNav() {
-    return "hello world";
-  }
-
-  // <nav className="Navigation">
-  // <NavLink exact to="/">
-  //   Jobly
-  // </NavLink>
-  // <NavLink exact to="/companies">
-  //   Companies
-  // </NavLink>
-  // <NavLink exact to="/jobs">
-  //   Jobs
-  // </NavLink>
-  // <NavLink exact to="/profile">
-  //   Profile
-  // </NavLink>
-  // <NavLink exact to="/logout">
-  //   Log out
-  // </NavLink>
-  // </nav>
-
-  // else it returns:
-
-  // <nav className="Navigation">
-  // <NavLink exact to="/">
-  //   Jobly
-  // </NavLink>
-  // <NavLink exact to="/login">
-  //   Login
-  // </NavLink>
+    
+    if (token !== null) {
+      console.log("made into not null token")
+      return (
+        <nav className="Navigation">
+          <NavLink exact to="/">
+            Jobly
+          </NavLink>
+          <NavLink exact to="/companies">
+            Companies
+          </NavLink>
+          <NavLink exact to="/jobs">
+            Jobs
+          </NavLink>
+          <NavLink exact to="/profile">
+            Profile
+          </NavLink>
+          <NavLink exact to="/logout">
+            Log out
+          </NavLink>
+        </nav>
+      )
+    } else {
+      return (
+        <nav className="Navigation">
+          <NavLink exact to="/">
+            Jobly
+          </NavLink>
+          <NavLink exact to="/login">
+            Login
+          </NavLink>
+          </nav>
+        )
+      }
+    }
 
   return (
     <div>

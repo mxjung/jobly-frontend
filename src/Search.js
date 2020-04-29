@@ -12,11 +12,37 @@ function Search({ updateSearchTerm }) {
 
   const [formData, setFormData] = useState("");
 
+  /** Send {name, quantity} to parent
+   *    & clear form. */
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    updateSearchTerm(formData);
+    setFormData("");
+  };
+
+  /** Update local state w/curr state of input elem */
+
+  const handleChange = evt => {
+    const { value }= evt.target;
+    setFormData(value);
+  };
+
+  /** render form */
+
   return (
-    <div>
-      {/* To add form here based on logic above */}
-    </div>
-  )
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="search">Search:</label>
+      <input
+        id="search"
+        name="search"
+        value={formData}
+        onChange={handleChange}
+        placeholder="Enter search term..."
+      />
+      <button>Submit</button>
+    </form>
+  );
 }
 
 export default Search;

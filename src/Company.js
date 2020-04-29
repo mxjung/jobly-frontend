@@ -1,4 +1,5 @@
-import React, {useParams, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 import './Company.css';
 
 import JobCard from "./JobCard"
@@ -11,32 +12,32 @@ import JoblyApi from "./JoblyApi"
  *    - Uses JobCard component */
 
 function Company({ token }) {
+  const {handle} = useParams();
+  const [companyData, setCompanyData] = useState({});
+  const [jobsData, setJobData] = useState([]);
 
-  const {name} = useParams();
-
-  let companyData;
-
-  // useEffect(() => {
-  //   async function getData() {
-  //     let resp = await JoblyApi.request()
-  //   }
-  // }, []);
+  useEffect(() => {
+    async function fetchCompanyData() {
+      let resp = await JoblyApi.getCompany(handle);
+      setCompanyData(resp);
+      setJobData(companyData.jobs);
+    }
+    fetchCompanyData();
+  }, []);
 
   function updateJobsList() {
     return "hello world";
   }
-
-  let jobData = {job: "hello world"};
-
+  
   // if job is not there, loading
 
   return (
     <div>
       <p>
-        {companyData}
+        {JSON.stringify(companyData)}
       </p>
       {/* To map through jobsList (returned from getData useEffect) to render each job object via JobCard */}
-      <JobCard updateJobsList={updateJobsList} jobData={jobData}/>
+      {/* <JobCard updateJobsList={updateJobsList} jobData={jobData}/> */}
     </div>
   )
 }
