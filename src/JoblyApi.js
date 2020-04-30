@@ -26,6 +26,7 @@ class JoblyApi {
       // let error = err.response.data;
       let message = err.response.data.message;
       // let status = err.response.statusCode;
+      // TODO: could send this back in an obj later
       throw Array.isArray(message) ? message: [message];
       // throw error;
     }

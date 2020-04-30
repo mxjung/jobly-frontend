@@ -11,9 +11,12 @@ function Alert({ msg, type, setErrMsg }) {
 
   const [visible, setVisible] = useState(true);
 
+  // to make it more reusable, name the function alertClose and then we pass in the function that determines what we should do when the error closes
+  // don't need to hardcode the behavior upon closing alert
   useEffect(() => {
     setTimeout(() => {
       setVisible(false);
+      // create that function inside login js, pass it in as a callback and alert invokes alertClose
       setErrMsg("");
     }, 3000);
   }, []);

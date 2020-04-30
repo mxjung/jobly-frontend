@@ -44,17 +44,24 @@ function Login() {
 
   /** upon 'submitted' state change, make API call to login or sign up
    * the user (determined by whether 'formType' is 'login' or 'signup') */
-  useEffect(() => {
-    async function loginUser() {
-      let { username, password } = formData;
 
-      try {
-        let resp = await JoblyApi.request('login', { username, password }, "post");
-        setToken(resp.token);
-      } catch (err) {
-        setErrMsg(err);
-      }
+   // one way to fix is by using a useCallback and call that callback from the click event
+   // don't need to make the entire component async because we don't have to await the result
+   // if we needed to, we could await inside handleSubmit
+
+   async function loginUser() {
+    let { username, password } = formData;
+
+    try {
+      let resp = await JoblyApi.request('login', { username, password }, "post");
+      setToken(resp.token);
+    } catch (err) {
+      setErrMsg(err);
     }
+  }
+
+  useEffect(() => {
+    
 
     async function registerUser() {
       try {
@@ -65,7 +72,10 @@ function Login() {
       }
     }
 
+    // place inside handleSubmit
+
     if (formType === "login" && submitted !== 0) {
+      // can call these without await b/c we don't need to wait for the answer
       loginUser();
     } else if (formType === "signup" && submitted !== 0) {
       registerUser();
