@@ -2,22 +2,20 @@ import React, {useState, useEffect} from 'react';
 import './Alert.css';
 
 
-/** Alert: Presentational 'dumb' component that renders a div with the appropriate message
- *    - Holds props of msg, type (i.e., success, danger), and setErMsg (to reset to empty string after rendering)
- *    - Used in Login, Profile components
+/** Alert: Mix of presentational and logical component that renders a div with the appropriate message
+ *    - Holds props of msg, type (i.e., success, danger), and alertClose (to handle alert closing by resetting errMsg in parent)
+ *    - Used in Login and Profile components
  */
 
-function Alert({ msg, type, setErrMsg }) {
+function Alert({ msg, type, alertClose }) {
 
   const [visible, setVisible] = useState(true);
 
-  // to make it more reusable, name the function alertClose and then we pass in the function that determines what we should do when the error closes
-  // don't need to hardcode the behavior upon closing alert
+  // unmounts the alert component after timeout and calls alertClose to reset errMsg to ""
   useEffect(() => {
     setTimeout(() => {
       setVisible(false);
-      // create that function inside login js, pass it in as a callback and alert invokes alertClose
-      setErrMsg("");
+      alertClose();
     }, 3000);
   }, []);
 

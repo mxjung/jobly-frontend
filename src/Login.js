@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 // import { useHistory } from 'react-router-dom';
 import './Login.css';
 import JoblyApi from './JoblyApi';
@@ -7,7 +7,7 @@ import TokenContext from "./tokenContext";
 import Alert from "./Alert";
 
 /** Login: Component renders login/signup page, with forms for each, depending on which button is clicked
- *    - Holds state of formType (i.e., login or signup)
+ *    - Holds state of formType (i.e., login or signup), formData, and errMsg
  *    - Used in Routes component
  *    - Uses Alert component
  */
@@ -24,7 +24,6 @@ function Login() {
 
   const INITIAL_FIELDS = { username: "", password: "", first_name: "", last_name: "", email: "" };
 
-  const [submitted, setSubmitted] = useState(0);
   const [formType, setFormType] = useState("login");
   const [formData, setFormData] = useState({ ...INITIAL_FIELDS });
   const [errMsg, setErrMsg] = useState([]);
@@ -42,55 +41,42 @@ function Login() {
   // }, [token]);
 
 
-  /** upon 'submitted' state change, make API call to login or sign up
-   * the user (determined by whether 'formType' is 'login' or 'signup') */
-
-   // one way to fix is by using a useCallback and call that callback from the click event
-   // don't need to make the entire component async because we don't have to await the result
-   // if we needed to, we could await inside handleSubmit
-
-   async function loginUser() {
+  /** loginUser: makes API call to login user */
+  
+  const loginUser = useCallback(async () => {
     let { username, password } = formData;
-
     try {
       let resp = await JoblyApi.request('login', { username, password }, "post");
       setToken(resp.token);
     } catch (err) {
       setErrMsg(err);
     }
-  }
+  }, []);
+  
 
-  useEffect(() => {
-    
+  /** registerUser: makes API call to register user */
 
-    async function registerUser() {
-      try {
-        let resp = await JoblyApi.request('users', formData, "post");
-        setToken(resp.token);
-      } catch (err) {
-       setErrMsg(err);
-      }
+  const registerUser = useCallback(async () => {
+    try {
+      let resp = await JoblyApi.request('users', formData, "post");
+      setToken(resp.token);
+    } catch (err) {
+      setErrMsg(err);
     }
-
-    // place inside handleSubmit
-
-    if (formType === "login" && submitted !== 0) {
-      // can call these without await b/c we don't need to wait for the answer
-      loginUser();
-    } else if (formType === "signup" && submitted !== 0) {
-      registerUser();
-    }
-  }, [submitted]);
+  }, []);
 
 
-  /** upon submission of form, prevent default behavior and update 'submitted' state
-   *  so useEffect for API call with run */
+  /** upon submission of form, prevent default behavior and make API call based on formType (login vs. signup) */
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setSubmitted((submitted) => (submitted + 1));
-  };
 
+    if (formType === "login") {
+      loginUser();
+    } else {
+      registerUser();
+    }
+  }
 
   /** Update local state w/curr state of input elem */
 
@@ -101,6 +87,8 @@ function Login() {
       [name]: value
     }));
   };
+
+  /** renderForms: creates a login or singup form based array of input objects passed in */
 
   function renderForms(formTypeFields) {
     return (
@@ -118,7 +106,7 @@ function Login() {
           </div>
         ))}
 
-        {errMsg.length !== 0 ? <Alert msg={errMsg} type="danger" setErrMsg={setErrMsg} /> : null}
+        {errMsg.length !== 0 ? <Alert msg={errMsg} type="danger" alertClose={() => setErrMsg("")} /> : null}
 
         <button className="btn btn-primary Login-submit">Submit</button>
       </form>
