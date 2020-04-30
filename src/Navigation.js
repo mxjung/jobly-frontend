@@ -5,7 +5,6 @@ import TokenContext from "./tokenContext";
 
 
 /** Navigation: Component that renders one of two navigation bars based on if a token exists
- *    - Holds props of token
  *    - Used in App
  * */
 
@@ -15,7 +14,7 @@ function Navigation() {
 
   // function that returns correct navbar based on value of token
   function returnCorrectNav() {
-    if (token !== null) {
+    if (token !== "null") {
       console.log("made into not null token")
       return (
         <nav className="Navigation">

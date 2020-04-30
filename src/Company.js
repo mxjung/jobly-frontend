@@ -7,11 +7,10 @@ import JoblyApi from "./JoblyApi"
 
 
 /** Company: Component renders profile page of single company, including company name, bio, and list of its job openings
- *    - Holds props of token
  *    - Used in Routes
  *    - Uses JobCard component */
 
-function Company({ token }) {
+function Company() {
   const {handle} = useParams();
   const [companyData, setCompanyData] = useState(null);
 

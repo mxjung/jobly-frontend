@@ -8,12 +8,11 @@ import Alert from "./Alert";
 
 /** Login: Component renders login/signup page, with forms for each, depending on which button is clicked
  *    - Holds state of formType (i.e., login or signup)
- *    - Holds props of updateToken
  *    - Used in Routes component
  *    - Uses Alert component
  */
 
-function Login({ updateToken }) {
+function Login() {
   const loginFields = [{ input: "username", label: "Username" },
   { input: "password", label: "Password" }];
   const signupFields = [{ input: "username", label: "Username" },
@@ -33,12 +32,17 @@ function Login({ updateToken }) {
 
   const history = useHistory();
 
+
+  // if token is present, redirect to '/jobs' route
   useEffect(() => {
     if (token !== "null") {
       history.push("/jobs");
     }
   }, [token]);
 
+
+  // upon 'submitted' state change, make API call to login or sign up
+  // the user (determined by whether 'formType' is 'login' or 'signup')
   useEffect(() => {
     async function loginUser() {
       let { username, password } = formData;
@@ -47,7 +51,8 @@ function Login({ updateToken }) {
         let resp = await JoblyApi.request('login', { username, password }, "post");
         setToken(resp.token);
       } catch (err) {
-        setErrMsg(err);
+        let message = Array.isArray(err.message) ? err.message: [err.message]
+        setErrMsg(message);
       }
     }
     
@@ -56,7 +61,8 @@ function Login({ updateToken }) {
         let resp = await JoblyApi.request('users', formData, "post");
         setToken(resp.token);
       } catch (err) {
-        setErrMsg(err);
+        let message = Array.isArray(err.message) ? err.message: [err.message]
+        setErrMsg(message);
       }
     }
 
@@ -67,7 +73,8 @@ function Login({ updateToken }) {
     }
   }, [submitted]);
 
-
+// upon submission of form, prevent default behavior and update 'submitted' state
+// so useEffect for API call with run
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setSubmitted((submitted) => (submitted + 1));
@@ -109,9 +116,8 @@ function Login({ updateToken }) {
   /** render form */
   return (
     <div>
-      <button onClick={() => setFormType("login")}>Login</button>
-      <button onClick={() => setFormType("signup")}>Sign up</button>
-
+      <button className="btn btn-primary" onClick={() => setFormType("login")}>Login</button>
+      <button className="btn btn-primary" onClick={() => setFormType("signup")}>Sign up</button>
       {formType === "login" ? renderForms(loginFields) : renderForms(signupFields)}
     </div>
   );

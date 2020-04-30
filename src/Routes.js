@@ -11,35 +11,38 @@ import Company from "./Company"
 import Jobs from "./Jobs"
 import Login from "./Login"
 import Profile from "./Profile"
+import Logout from "./Logout"
 
 
 // To figure out how to handle lack of token to redirect to login page
 
 /** Routes: Component that performs client-side routing for Jobly
- *    - Holds props of token
  *    - Used in App
  *    - Uses Home, Companies, Company, Jobs, Login, and Profile Components */
 
-function Routes({ token, username, updateToken }) {
+function Routes() {
   return (
     <Switch>
       <Route exact path="/">
-        <Home token={token}/>
+        <Home />
       </Route>
       <Route exact path="/companies">
-        <Companies token={token} />
+        <Companies />
       </Route>
       <Route exact path="/companies/:handle">
-        <Company token={token} />
+        <Company />
       </Route>
       <Route exact path="/jobs">
-        <Jobs token={token} />
+        <Jobs />
       </Route>
       <Route exact path="/login">
-        <Login updateToken={updateToken}/>
+        <Login />
       </Route>
       <Route exact path="/profile">
-        <Profile token={token} username={username}/>
+        <Profile />
+      </Route>
+      <Route exact path="/logout">
+        <Logout />
       </Route>
       <Redirect to="/" />
     </Switch>

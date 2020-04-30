@@ -1,18 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import './Profile.css';
+import TokenContext from './tokenContext';
 
 import Alert from "./Alert"
 
 /** Profile: Component renders a form with current user's profile data
  *    - Holds state of updated, a status that tracks if the user profile has been updated via form submission
- *    - Holds props of token and username
  *    - Used in Routes component
  *    - Uses Alert component
  */
 
-function Profile({ token, username }) {
+function Profile() {
 
   const [updated, setUpdated] = useState(false)
+  const {token, username} = useContext(TokenContext);
 
   // useEffect: API call to GET profile info and set initial values (do this upon the mounting of component)
   // API calls to PATCH / update profile
@@ -25,9 +26,9 @@ function Profile({ token, username }) {
 
   return (
     <div>
-      Profile
+      {username}'s Profile
       {/* form to update profile here */}
-      <Alert msg={msg} type={type}/>
+      {/* <Alert msg={msg} type={type}/> */}
     </div>
   )
 }

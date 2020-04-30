@@ -3,12 +3,13 @@ import './Alert.css';
 
 
 /** Alert: Presentational 'dumb' component that renders a div with the appropriate message
- *    - Holds props of msg and type (i.e., success, danger)
+ *    - Holds props of msg, type (i.e., success, danger), and setErMsg (to reset to empty string after rendering)
  *    - Used in Login, Profile components
  */
 
 function Alert({ msg, type, setErrMsg }) {
 
+  console.log(`\n\n\n The value of msg inside Alert is `, msg, '\n\n\n');
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
