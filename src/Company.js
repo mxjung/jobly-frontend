@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import './Company.css';
 
 import JobCard from "./JobCard"
@@ -11,14 +11,18 @@ import JoblyApi from "./JoblyApi"
  *    - Uses JobCard component */
 
 function Company() {
-  const {handle} = useParams();
+  const { handle } = useParams();
   const [companyData, setCompanyData] = useState(null);
 
   // useEffect that will make API call for single company upon first component mount
   useEffect(() => {
     async function fetchCompanyData() {
-      let resp = await JoblyApi.getCompany(handle);
-      setCompanyData(resp);
+      try {
+        let resp = await JoblyApi.getCompany(handle);
+        setCompanyData(resp);
+      } catch (err) {
+        console.log(err);
+      }
     }
     fetchCompanyData();
   }, [handle]);
@@ -30,12 +34,12 @@ function Company() {
           <h3>{companyData.name}</h3>
           <p className="Company-description">{companyData.description}</p>
           {companyData.jobs.map(jobData => (
-            <JobCard key={jobData.id} jobData={jobData}/>  
+            <JobCard key={jobData.id} jobData={jobData} />
           ))}
         </div>
       )}
     </div>
-    )
+  )
 }
 
 export default Company;

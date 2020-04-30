@@ -9,7 +9,6 @@ import './Alert.css';
 
 function Alert({ msg, type, setErrMsg }) {
 
-  console.log(`\n\n\n The value of msg inside Alert is `, msg, '\n\n\n');
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {

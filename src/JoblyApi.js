@@ -23,11 +23,11 @@ class JoblyApi {
 
     catch(err) {
       console.error("API Error:", err.response);
-      let error = err.response.data;
-      // let message = err.response.data.message;
+      // let error = err.response.data;
+      let message = err.response.data.message;
       // let status = err.response.statusCode;
-      // throw Array.isArray(message) ? message: [message];
-      throw error;
+      throw Array.isArray(message) ? message: [message];
+      // throw error;
     }
   }
 

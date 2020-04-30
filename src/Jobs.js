@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './Jobs.css';
 import JoblyApi from "./JoblyApi";
 
@@ -16,23 +16,27 @@ import JobCard from "./JobCard"
 function Jobs() {
   const [searchTerm, setSearchTerm] = useState("");
   const [jobsList, setjobsList] = useState(null);
-  
+
   // useEffect that will make API call for filtered jobs upon change in searchTerm
   useEffect(() => {
-    async function fetchJobs () {
-      let resp = await JoblyApi.request(`jobs?search=${searchTerm}`);
-      setjobsList(resp.jobs);
+    async function fetchJobs() {
+      try {
+        let resp = await JoblyApi.request(`jobs?search=${searchTerm}`);
+        setjobsList(resp.jobs);
+      } catch (err) {
+        console.log(err);
+      }
     }
     fetchJobs();
   }, [searchTerm]);
-  
+
   return (
     <div className="Jobs">
-      <Search setSearchTerm={setSearchTerm}/>
+      <Search setSearchTerm={setSearchTerm} />
       {jobsList === null ? <p>Loading...</p> : (
         <div>
           {jobsList.map(jobData => (
-            <JobCard key={jobData.id} jobData={jobData}/>  
+            <JobCard key={jobData.id} jobData={jobData} />
           ))}
         </div>
       )}

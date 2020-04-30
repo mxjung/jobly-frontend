@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import './Login.css';
 import JoblyApi from './JoblyApi';
 import TokenContext from "./tokenContext";
@@ -15,6 +15,7 @@ import Alert from "./Alert";
 function Login() {
   const loginFields = [{ input: "username", label: "Username" },
   { input: "password", label: "Password" }];
+
   const signupFields = [{ input: "username", label: "Username" },
   { input: "password", label: "Password" },
   { input: "first_name", label: "First name" },
@@ -30,15 +31,15 @@ function Login() {
 
   const { token, setToken } = useContext(TokenContext);
 
-  const history = useHistory();
+  // const history = useHistory();
 
 
-  // if token is present, redirect to '/jobs' route
-  useEffect(() => {
-    if (token !== "null") {
-      history.push("/jobs");
-    }
-  }, [token]);
+  // if user obj is present, redirect to '/jobs' route
+  // useEffect(() => {
+  //   if (user !== "null") {
+  //     history.push("/jobs");
+  //   }
+  // }, [token]);
 
 
   /** upon 'submitted' state change, make API call to login or sign up
@@ -51,8 +52,7 @@ function Login() {
         let resp = await JoblyApi.request('login', { username, password }, "post");
         setToken(resp.token);
       } catch (err) {
-        let message = Array.isArray(err.message) ? err.message : [err.message]
-        setErrMsg(message);
+        setErrMsg(err);
       }
     }
 
@@ -61,8 +61,7 @@ function Login() {
         let resp = await JoblyApi.request('users', formData, "post");
         setToken(resp.token);
       } catch (err) {
-        let message = Array.isArray(err.message) ? err.message : [err.message]
-        setErrMsg(message);
+       setErrMsg(err);
       }
     }
 
@@ -76,6 +75,7 @@ function Login() {
 
   /** upon submission of form, prevent default behavior and update 'submitted' state
    *  so useEffect for API call with run */
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setSubmitted((submitted) => (submitted + 1));

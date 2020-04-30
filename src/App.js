@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem('token', token);
 
-    if (token !== "null") {
+    if (String(token) !== "null") {
       let payload = jwt.decode(token);
       let updatedUsername = payload.username;
       setUsername(updatedUsername);
