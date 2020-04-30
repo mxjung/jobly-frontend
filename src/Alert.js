@@ -10,6 +10,7 @@ import './Alert.css';
 function Alert({ msg, type, alertClose }) {
 
   const [visible, setVisible] = useState(true);
+  console.log("inside Alert, msg is: ", msg);
 
   // unmounts the alert component after timeout and calls alertClose to reset errMsg to ""
   useEffect(() => {

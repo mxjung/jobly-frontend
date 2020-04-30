@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import './Navigation.css';
 import { NavLink } from "react-router-dom";
-import TokenContext from "./tokenContext";
+// import TokenContext from "./tokenContext";
+import UserContext from "./userContext";
 
 
 /** Navigation: Component that renders one of two navigation bars based on if a token exists
@@ -10,18 +11,17 @@ import TokenContext from "./tokenContext";
 
 function Navigation() {
 
-  const { token } = useContext(TokenContext);
+  const { user } = useContext(UserContext);
 
   // function that returns correct navbar based on value of token
   function returnCorrectNav() {
-    if (token !== "null") {
-      console.log("made into not null token")
+    if (user !== null) {
       return (
         <nav className="Navigation navbar navbar-expand-lg navbar-light bg-light">
           <NavLink className="navbar-brand" exact to="/">
             Jobly
           </NavLink>
-          <ul class="navbar-nav ml-auto">
+          <ul className="navbar-nav ml-auto">
             <li className="Navigation nav-item">
               <NavLink exact to="/companies">
                 Companies
@@ -51,7 +51,7 @@ function Navigation() {
         <NavLink className="navbar-brand" exact to="/">
           Jobly
         </NavLink>
-        <ul class="navbar-nav ml-auto">
+        <ul className="navbar-nav ml-auto">
           <li className="Navigation nav-item">
             <NavLink exact to="/login">
               Login

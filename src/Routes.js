@@ -4,6 +4,7 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
+import PrivateRoute from "./PrivateRoute";
 
 import Home from "./Home"
 import Companies from "./Companies"
@@ -26,24 +27,24 @@ function Routes() {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route exact path="/companies">
-        <Companies />
-      </Route>
-      <Route exact path="/companies/:handle">
-        <Company />
-      </Route>
-      <Route exact path="/jobs">
-        <Jobs />
-      </Route>
       <Route exact path="/login">
         <Login />
       </Route>
-      <Route exact path="/profile">
+      <PrivateRoute exact path="/companies">
+        <Companies />
+      </PrivateRoute>
+      <PrivateRoute exact path="/companies/:handle">
+        <Company />
+      </PrivateRoute>
+      <PrivateRoute exact path="/jobs">
+        <Jobs />
+      </PrivateRoute>
+      <PrivateRoute exact path="/profile">
         <Profile />
-      </Route>
-      <Route exact path="/logout">
+      </PrivateRoute>
+      <PrivateRoute exact path="/logout">
         <Logout />
-      </Route>
+      </PrivateRoute>
       <Redirect to="/" />
     </Switch>
   );

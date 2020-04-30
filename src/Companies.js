@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import './Companies.css';
 import JoblyApi from "./JoblyApi";
 

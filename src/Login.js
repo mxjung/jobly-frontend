@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useContext } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './Login.css';
 import JoblyApi from './JoblyApi';
 import TokenContext from "./tokenContext";
+import UserContext from "./userContext";
 
 import Alert from "./Alert";
 
@@ -28,31 +29,29 @@ function Login() {
   const [formData, setFormData] = useState({ ...INITIAL_FIELDS });
   const [errMsg, setErrMsg] = useState([]);
 
-  const { token, setToken } = useContext(TokenContext);
+  const { setToken } = useContext(TokenContext);
+  const { user } = useContext(UserContext);
 
-  // const history = useHistory();
+  const history = useHistory();
 
-
-  // if user obj is present, redirect to '/jobs' route
-  // useEffect(() => {
-  //   if (user !== "null") {
-  //     history.push("/jobs");
-  //   }
-  // }, [token]);
-
+  if (user !== null) {
+    history.push("/jobs");
+  }
 
   /** loginUser: makes API call to login user */
-  
+
   const loginUser = useCallback(async () => {
     let { username, password } = formData;
     try {
       let resp = await JoblyApi.request('login', { username, password }, "post");
+      console.log('before setToken')
       setToken(resp.token);
+      
     } catch (err) {
       setErrMsg(err);
     }
-  }, []);
-  
+  }, [formData]);
+
 
   /** registerUser: makes API call to register user */
 
@@ -60,10 +59,11 @@ function Login() {
     try {
       let resp = await JoblyApi.request('users', formData, "post");
       setToken(resp.token);
+      history.push("/jobs");
     } catch (err) {
       setErrMsg(err);
     }
-  }, []);
+  }, [formData]);
 
 
   /** upon submission of form, prevent default behavior and make API call based on formType (login vs. signup) */

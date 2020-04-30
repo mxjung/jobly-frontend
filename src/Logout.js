@@ -13,11 +13,14 @@ function Logout() {
   const history = useHistory();
   const {setToken} = useContext(TokenContext);
 
-  setToken("null");
-  history.push("/");
+  async function resetToken() {
+    await setToken("null");
+    history.push("/");
+  }
+
+  resetToken();
 
   return(null);
-
 }
 
 export default Logout;
