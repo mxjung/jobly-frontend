@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './Search.css';
 
 
@@ -29,16 +29,17 @@ function Search({ setSearchTerm }) {
 
   /** render form */
   return (
-    <form className="Search" onSubmit={handleSubmit}>
-      <input
-        className="Search-input "
-        id="search"
-        name="search"
-        value={formData}
-        onChange={handleChange}
-        placeholder="Enter search term..."
-      />
-      <button className="btn btn-primary Search-submit">Submit</button>
+    <form className="Search form-inline my-2 my-lg-0" onSubmit={handleSubmit}>
+        <input
+          className="Search-input input-large form-control"
+          type="text"
+          id="search"
+          name="search"
+          value={formData}
+          onChange={handleChange}
+          placeholder="Enter search term..."
+        />
+        <button className="Search-submit btn btn-primary">Submit</button>
     </form>
   );
 }

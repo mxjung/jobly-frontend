@@ -1,8 +1,9 @@
-.Search-input {
+.Search-input.input-large.form-control {
   margin: 2rem 0;
-  width: 70%;
+  width: 72%;
 }
 
-.Search-submit {
-  padding: 0.15rem 1rem;
+.Search.form-inline {
+  display: flex;
+  justify-content: center;
 }
