@@ -18,13 +18,12 @@ function Search({ setSearchTerm }) {
   const handleSubmit = evt => {
     evt.preventDefault();
     setSearchTerm(formData);
-    setFormData("");
   };
 
   /** Update local state w/curr state of input elem */
 
   const handleChange = evt => {
-    const { value }= evt.target;
+    const { value } = evt.target;
     setFormData(value);
   };
 

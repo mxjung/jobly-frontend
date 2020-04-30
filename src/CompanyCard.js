@@ -8,13 +8,14 @@ import { Link } from "react-router-dom";
 
 function CompanyCard({ companyData }) {
   return (
-    <Link to={`/companies/${companyData.handle}`}>
-      <div className="company-card">
-        <h3>{companyData.name}</h3>
-        <p>{companyData.description}</p>
-        <img src={companyData.logo_url} alt="company_pic"></img>
-      </div>
-    </Link>
+    <div className="company-card">
+      <Link to={`/companies/${companyData.handle}`}>
+        <span className="company-card-link"></span>
+      </Link>
+      <h5>{companyData.name}</h5>
+      <p>{companyData.description}</p>
+      <img src={companyData.logo_url} alt="company_pic"></img>
+    </div>
   )
 }
 

@@ -1,0 +1,9 @@
+.Company {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.Company-description {
+  width: 80%;
+  margin: auto auto;
+}

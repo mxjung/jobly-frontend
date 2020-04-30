@@ -3,9 +3,24 @@
 }
 
 .company-card {
+  position: relative;
   width: 80%;
   height: auto;
   background-color: rgb(225, 232, 235);
   padding: 2rem;
-  margin: 10px;
+  text-align: left;
+  margin: 2rem auto;
+}
+
+.company-card-link {
+  position:absolute; 
+  width:100%;
+  height:100%;
+  top:0;
+  left: 0;
+  z-index: 1;
+}
+
+.company-card :hover {
+  box-shadow: 3px 3px 3px #ccc;
 }

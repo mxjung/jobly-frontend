@@ -24,11 +24,11 @@ function Company() {
   }, [handle]);
 
   return (
-    <div>
+    <div className="Company">
       {companyData === null ? <p>Loading...</p> : (
         <div>
           <h3>{companyData.name}</h3>
-          <span>{companyData.description}</span>
+          <p className="Company-description">{companyData.description}</p>
           {companyData.jobs.map(jobData => (
             <JobCard key={jobData.id} jobData={jobData}/>  
           ))}
