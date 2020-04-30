@@ -41,8 +41,8 @@ function Login() {
   }, [token]);
 
 
-  // upon 'submitted' state change, make API call to login or sign up
-  // the user (determined by whether 'formType' is 'login' or 'signup')
+  /** upon 'submitted' state change, make API call to login or sign up
+   * the user (determined by whether 'formType' is 'login' or 'signup') */
   useEffect(() => {
     async function loginUser() {
       let { username, password } = formData;
@@ -51,17 +51,17 @@ function Login() {
         let resp = await JoblyApi.request('login', { username, password }, "post");
         setToken(resp.token);
       } catch (err) {
-        let message = Array.isArray(err.message) ? err.message: [err.message]
+        let message = Array.isArray(err.message) ? err.message : [err.message]
         setErrMsg(message);
       }
     }
-    
+
     async function registerUser() {
       try {
         let resp = await JoblyApi.request('users', formData, "post");
         setToken(resp.token);
       } catch (err) {
-        let message = Array.isArray(err.message) ? err.message: [err.message]
+        let message = Array.isArray(err.message) ? err.message : [err.message]
         setErrMsg(message);
       }
     }
@@ -73,8 +73,9 @@ function Login() {
     }
   }, [submitted]);
 
-// upon submission of form, prevent default behavior and update 'submitted' state
-// so useEffect for API call with run
+
+  /** upon submission of form, prevent default behavior and update 'submitted' state
+   *  so useEffect for API call with run */
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setSubmitted((submitted) => (submitted + 1));
@@ -95,9 +96,10 @@ function Login() {
     return (
       <form onSubmit={handleSubmit}>
         {formTypeFields.map(field => (
-          <div key={field.input}>
-            <label htmlFor={field.input}>{field.label}:</label>
+          <div className="form-group" key={field.input}>
+            <label htmlFor={field.input}>{field.label}</label>
             <input
+              className="Login-input"
               id={field.input}
               name={field.input}
               value={formData[field.input]}
@@ -108,16 +110,18 @@ function Login() {
 
         {errMsg.length !== 0 ? <Alert msg={errMsg} type="danger" setErrMsg={setErrMsg} /> : null}
 
-        <button>Submit</button>
+        <button className="btn btn-primary Login-submit">Submit</button>
       </form>
     )
   }
 
   /** render form */
   return (
-    <div>
-      <button className="btn btn-primary" onClick={() => setFormType("login")}>Login</button>
-      <button className="btn btn-primary" onClick={() => setFormType("signup")}>Sign up</button>
+    <div className="Login">
+      <div className="Login-form-buttons">
+        <button className={formType === "login" ? "btn btn-primary" : "btn btn-light"} onClick={() => setFormType("login")}>Login</button>
+        <button className={formType === "signup" ? "btn btn-primary" : "btn btn-light"} onClick={() => setFormType("signup")}>Sign up</button>
+      </div>
       {formType === "login" ? renderForms(loginFields) : renderForms(signupFields)}
     </div>
   );

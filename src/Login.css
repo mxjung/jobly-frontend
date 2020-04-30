@@ -1,0 +1,28 @@
+.Login {
+  text-align: center;
+  position: relative;
+  top: 3rem;
+}
+
+.Login-input {
+  position: relative;
+  left: 1rem;
+}
+
+.form-group {
+  position: relative;
+  top: 1.5rem;
+  font-weight: 600;
+}
+
+.Login-submit {
+  position: relative;
+  top: 1rem;
+  margin: 1rem 0;
+}
+
+.Home {
+  text-align: center;
+  position: relative;
+  top: 7rem;
+}

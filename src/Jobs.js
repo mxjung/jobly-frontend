@@ -27,8 +27,7 @@ function Jobs() {
   }, [searchTerm]);
   
   return (
-    <div>
-      Jobs
+    <div className="Jobs">
       <Search setSearchTerm={setSearchTerm}/>
       {jobsList === null ? <p>Loading...</p> : (
         <div>

@@ -22,7 +22,7 @@ function Alert({ msg, type, setErrMsg }) {
   return (
     <div>
       {visible ? (
-        <div className={`alert alert-${type}`}>
+        <div className={`Alert alert alert-${type}`}>
           {msg.map((m,idx) => <p key={idx}>{m}</p>)}
         </div>
       ) : null}

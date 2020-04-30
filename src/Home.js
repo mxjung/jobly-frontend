@@ -14,10 +14,10 @@ function Home() {
   const { token } = useContext(TokenContext);
 
   return (
-    <div>
+    <div className="Home">
       <h1>Jobly</h1>
       <p>All the jobs in one convenient place.</p>
-      {token !== 'null' ? <h4>Welcome Back!</h4> : <Link to="/login"><button className="btn btn-primary">Log in</button></Link>}
+      {token !== 'null' ? <h4>Welcome Back!</h4> : <Link to="/login"><button className="btn btn-primary home-login-button">Log in</button></Link>}
     </div>
   )
 }

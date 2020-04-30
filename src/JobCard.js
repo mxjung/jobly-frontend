@@ -12,10 +12,10 @@ import './JobCard.css';
 function JobCard({ jobData }) {
   return (
     <div className="job-card">
-      <h4>{jobData.title}</h4>
-      <h5>Salary: {jobData.salary}</h5>
-      <h5>Equity: {jobData.equity}</h5>
-      <button>Apply</button>
+      <h5>{jobData.title}</h5>
+      <p>Salary: {jobData.salary}</p>
+      <p>Equity: {jobData.equity}</p>
+      <button className="btn btn-danger">Apply</button>
     </div>
   )
 }

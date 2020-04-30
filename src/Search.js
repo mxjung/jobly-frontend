@@ -30,16 +30,16 @@ function Search({ setSearchTerm }) {
 
   /** render form */
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="search">Search:</label>
+    <form className="Search" onSubmit={handleSubmit}>
       <input
+        className="Search-input "
         id="search"
         name="search"
         value={formData}
         onChange={handleChange}
         placeholder="Enter search term..."
       />
-      <button>Submit</button>
+      <button className="btn btn-primary Search-submit">Submit</button>
     </form>
   );
 }

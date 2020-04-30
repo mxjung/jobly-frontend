@@ -1,8 +1,8 @@
 
 .job-card {
-  width: 400px;
-  height: 200px;
-  background-color: lightblue;
+  width: 80%;
+  height: auto;
+  background-color: rgb(225, 232, 235);
   padding: 2rem;
   margin: 10px;
 }

@@ -37,7 +37,6 @@ function Companies() {
     <div>
       {companiesList === null ? <p>Loading...</p> : (
       <div>
-        Companies
         <Search setSearchTerm={setSearchTerm}/>
         {companiesList.map(companyData => (
           <CompanyCard key={companyData.handle} companyData={companyData}/>

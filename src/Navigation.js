@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import './Navigation.css';
 import { NavLink } from "react-router-dom";
 import TokenContext from "./tokenContext";
@@ -17,42 +17,56 @@ function Navigation() {
     if (token !== "null") {
       console.log("made into not null token")
       return (
-        <nav className="Navigation">
-          <NavLink exact to="/">
+        <nav className="Navigation navbar navbar-expand-lg navbar-light bg-light">
+          <NavLink className="navbar-brand" exact to="/">
             Jobly
           </NavLink>
-          <NavLink exact to="/companies">
-            Companies
-          </NavLink>
-          <NavLink exact to="/jobs">
-            Jobs
-          </NavLink>
-          <NavLink exact to="/profile">
-            Profile
-          </NavLink>
-          <NavLink exact to="/logout">
-            Log out
-          </NavLink>
+          <ul class="navbar-nav ml-auto">
+            <li className="Navigation nav-item">
+              <NavLink exact to="/companies">
+                Companies
+              </NavLink>
+            </li>
+            <li className="Navigation nav-item">
+              <NavLink exact to="/jobs">
+                Jobs
+              </NavLink>
+            </li>
+            <li className="Navigation nav-item">
+              <NavLink exact to="/profile">
+                Profile
+              </NavLink>
+            </li>
+            <li className="Navigation nav-item">
+              <NavLink exact to="/logout">
+                Log out
+              </NavLink>
+            </li>
+            </ul>
         </nav>
       )
     } else {
       return (
-        <nav className="Navigation">
-          <NavLink exact to="/">
-            Jobly
-          </NavLink>
-          <NavLink exact to="/login">
-            Login
-          </NavLink>
+        <nav className="Navigation navbar navbar-expand-lg navbar-light bg-light">
+        <NavLink className="navbar-brand" exact to="/">
+          Jobly
+        </NavLink>
+        <ul class="navbar-nav ml-auto">
+          <li className="Navigation nav-item">
+            <NavLink exact to="/login">
+              Login
+            </NavLink>
+            </li>
+            </ul>
           </nav>
         )
       }
     }
 
   return (
-    <div>
-      {returnCorrectNav()}
-    </div>
+          <div>
+            {returnCorrectNav()}
+          </div>
   );
 }
 
