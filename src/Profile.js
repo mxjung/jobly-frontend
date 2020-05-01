@@ -1,7 +1,7 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState, useContext, useCallback} from 'react';
 import './Profile.css';
-import TokenContext from './tokenContext';
-
+import JoblyApi from './JoblyApi';
+import TokenContext from "./tokenContext";
 import Alert from "./Alert"
 
 /** Profile: Component renders a form with current user's profile data
@@ -11,26 +11,88 @@ import Alert from "./Alert"
  */
 
 function Profile() {
+  const updateFields = [
+    { input: "first_name", label: "First name" },
+    { input: "last_name", label: "Last name" },
+    { input: "email", label: "Email" },
+    { input: "photo_url", label: "Photo Url" },
+    { input: "password", label: "Re-enter Password" }
+  ];
+  
+  const {user, setUser} = useContext(TokenContext);
+  
+  const INITIAL_FIELDS = {first_name: user.first_name, 
+                          last_name: user.last_name, 
+                          email: user.email, 
+                          password: "", 
+                          photo_url: user.photo_url};
 
-  const [updated, setUpdated] = useState(false)
-  const {token, username} = useContext(TokenContext);
+  const [formData, setFormData] = useState({ ...INITIAL_FIELDS });
 
-  // useEffect: API call to GET profile info and set initial values (do this upon the mounting of component)
-  // API calls to PATCH / update profile
-  // when we get back response, if it's not 404, set state alert to be true
-  // re-render the page? or just don't clear the form
-  // render alert
+  const INITIAL_ALERT = {type: "", msgs: []};
+  const [alertObj, setAlertObj] = useState({...INITIAL_ALERT});
 
-  let msg = "placeholder alert";
-  let type = "placeholder type";
 
+  /** updateUser: makes API call to update user */
+
+  const updateUser = useCallback(async () => {
+    try {
+      let resp = await JoblyApi.request(`users/${user.username}`, formData, "patch");
+      setUser(resp.user);
+      setAlertObj({type: "success", msgs: ["User Profile Updated"]})
+    } catch (err) {
+      setAlertObj({type: "danger", msgs: err})
+
+      // setErrMsg(err);
+    }
+  }, [formData]);
+
+  /** upon submission of form, prevent default behavior and make API call to update User */
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    updateUser();
+  }
+
+  /** Update local state w/curr state of input elem */
+
+  const handleChange = (evt) => {
+    const { value, name } = evt.target;
+    setFormData(oldForm => ({
+      ...oldForm,
+      [name]: value
+    }));
+  }
+
+  /** render form */
   return (
-    <div>
-      {username}'s Profile
-      {/* form to update profile here */}
-      {/* <Alert msg={msg} type={type}/> */}
+    <div className="Login">
+      <h2>Profile</h2>
+      <div>
+        <h4>Username</h4>
+        <p>{user.username}</p>
+      </div>
+      <form onSubmit={handleSubmit}>
+        {updateFields.map(field => (
+          <div className="form-group" key={field.input}>
+            <label htmlFor={field.input}>{field.label}</label>
+            <input
+              className="Login-input"
+              id={field.input}
+              name={field.input}
+              type={field.input === "password" ? "password" : "text"}
+              value={formData[field.input]}
+              onChange={handleChange}
+            />
+          </div>
+        ))}
+
+        {alertObj.msgs.length !== 0 ? <Alert msg={alertObj.msgs} type={alertObj.type} alertClose={() => setAlertObj({...INITIAL_ALERT})} /> : null}
+
+        <button className="btn btn-primary Login-submit">Submit</button>
+      </form>
     </div>
-  )
+  );
 }
 
 export default Profile;

@@ -1,9 +1,8 @@
 import React, { useState, useCallback, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import './Login.css';
 import JoblyApi from './JoblyApi';
 import TokenContext from "./tokenContext";
-import UserContext from "./userContext";
 
 import Alert from "./Alert";
 
@@ -29,13 +28,14 @@ function Login() {
   const [formData, setFormData] = useState({ ...INITIAL_FIELDS });
   const [errMsg, setErrMsg] = useState([]);
 
-  const { setToken } = useContext(TokenContext);
-  const { user } = useContext(UserContext);
+  const { user, setToken } = useContext(TokenContext);
 
   const history = useHistory();
 
   if (user !== null) {
-    history.push("/jobs");
+    // history.push("/jobs");
+
+    // redirect instead***********
   }
 
   /** loginUser: makes API call to login user */
@@ -44,9 +44,7 @@ function Login() {
     let { username, password } = formData;
     try {
       let resp = await JoblyApi.request('login', { username, password }, "post");
-      console.log('before setToken')
       setToken(resp.token);
-      
     } catch (err) {
       setErrMsg(err);
     }
@@ -59,7 +57,6 @@ function Login() {
     try {
       let resp = await JoblyApi.request('users', formData, "post");
       setToken(resp.token);
-      history.push("/jobs");
     } catch (err) {
       setErrMsg(err);
     }
@@ -100,6 +97,7 @@ function Login() {
               className="Login-input"
               id={field.input}
               name={field.input}
+              type={field.input === "password" ? "password" : "text"}
               value={formData[field.input]}
               onChange={handleChange}
             />
@@ -111,6 +109,10 @@ function Login() {
         <button className="btn btn-primary Login-submit">Submit</button>
       </form>
     )
+  }
+
+  if (user !== null) {
+    return <Redirect to="/jobs"/>
   }
 
   /** render form */

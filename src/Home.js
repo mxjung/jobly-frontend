@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import UserContext from "./userContext";
+import TokenContext from "./tokenContext";
 
 /** Home: Component that renders home page with description of Jobly and depending 
  *  on token status, either a Login button (if it doesn't exist), or a 'welcome back' message
@@ -11,7 +11,7 @@ import UserContext from "./userContext";
 
 function Home() {
 
-  const { user } = useContext(UserContext);
+  const { user } = useContext(TokenContext);
 
   return (
     <div className="Home">

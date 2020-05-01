@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import './Navigation.css';
 import { NavLink } from "react-router-dom";
-// import TokenContext from "./tokenContext";
-import UserContext from "./userContext";
+import TokenContext from "./tokenContext";
 
 
 /** Navigation: Component that renders one of two navigation bars based on if a token exists
@@ -11,7 +10,7 @@ import UserContext from "./userContext";
 
 function Navigation() {
 
-  const { user } = useContext(UserContext);
+  const { user } = useContext(TokenContext);
 
   // function that returns correct navbar based on value of token
   function returnCorrectNav() {
@@ -38,8 +37,9 @@ function Navigation() {
               </NavLink>
             </li>
             <li className="Navigation nav-item">
-              <NavLink exact to="/logout">
+              <NavLink to="#" onClick={}>
                 Log out
+                {/* write logic to logout (pass in from app as prop to navigation) *********** */}
               </NavLink>
             </li>
             </ul>

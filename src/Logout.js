@@ -15,6 +15,7 @@ function Logout() {
 
   async function resetToken() {
     await setToken("null");
+    // redirect *********
     history.push("/");
   }
 

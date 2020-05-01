@@ -16,9 +16,13 @@ function Alert({ msg, type, alertClose }) {
   useEffect(() => {
     setTimeout(() => {
       setVisible(false);
-      alertClose();
+      // if parent does/does not pass in alertClose func
+      if (alertClose) {
+        alertClose();
+      }
     }, 3000);
   }, []);
+
 
   return (
     <div>

@@ -21,6 +21,8 @@ class JoblyApi {
     }
 
     catch(err) {
+      // check for err.message => "Network Error" for downed server
+      
       console.error("API Error:", err.response);
       // let error = err.response.data;
       let message = err.response.data.message;

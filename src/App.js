@@ -19,12 +19,15 @@ import UserContext from "./userContext";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
+  // const [token, setToken] = useState("null");
   const [user, setUser] = useState(null);
-  console.log('user state has been updated in App: ', user);
+  const [requestCompleted, setRequestCompleted] = useState(false);
+
   useEffect(() => {
+    console.log("effect in app ran");
     localStorage.setItem('token', token);
 
-    if (String(token) !== "null") {
+    if (token !== null) {
       let payload = jwt.decode(token);
       let updatedUsername = payload.username;
 
@@ -32,27 +35,33 @@ function App() {
         try {
           let resp = await JoblyApi.request(`users/${updatedUsername}`);
           setUser(resp.user);
+
         } catch (err) {
           console.error(err);
         }
-      } 
+      }
       fetchUser();
     } else {
       setUser(null);
     }
+
+    // render our routes ONLY when user has been set (or else in PrivateRoutes our user will still be null)
+    // "Hydration"
+    setRequestCompleted(true);
   }, [token]);
-  
+
+  // ********* browserroute in index not app. 
   return (
     <div>
-      <TokenContext.Provider value={{ token, setToken }}>
-        <UserContext.Provider value={{ user }}>
-          <BrowserRouter>
-            <Navigation />
-            <div className="container">
-              <Routes />
-            </div>
-          </BrowserRouter>
-        </UserContext.Provider>
+      <TokenContext.Provider value={{ token, setToken, user, setUser }}>
+        {/* <UserContext.Provider value={{ user, setUser }}> */}
+        <BrowserRouter>
+          <Navigation />
+          <div className="container">
+            {requestCompleted ? <Routes /> : <div>Loading...</div>}
+          </div>
+        </BrowserRouter>
+        {/* </UserContext.Provider> */}
       </TokenContext.Provider>
     </div >
   );

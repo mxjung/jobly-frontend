@@ -4,19 +4,19 @@
 
 3. Maybe related to question 2: 'React' is defined but never used  no-unused-vars (inside Logout)
 
-BEFORE NEXT CODE REVIEW
+<!-- 4. We require correct password inside updating profile, but password is never verified with token, only though login. How would we go about using the password inside Profile form to verify that correct user is patching their own data without making a "dumb" api call to users/login.  -->
 
-- TODO: private routing to centralize auth
+4. We are being redirected to the login page upon every refresh
+
+BEFORE NEXT CODE REVIEW
 
 ###################
 - TODO: add more detailed error handling by updating joblyApi to inspect status code
 
 - TODO: Anywhere alert is rendered, create state for errMsg
 
-- TODO: create protected views using user obj
-
 - TODO: Make error messages more friendly
 
-- TODO: diff color for buttons based on which is selected for login / signup
-
 - TODO: make password input field ****** private
+
+- TODO: user localStorage to manage the user data
