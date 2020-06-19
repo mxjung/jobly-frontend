@@ -33,7 +33,7 @@ function Login() {
   const history = useHistory();
 
   if (user !== null) {
-    // history.push("/jobs");
+    history.push("/jobs");
 
     // redirect instead***********
   }

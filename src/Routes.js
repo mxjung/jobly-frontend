@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {
   Switch,
   Route,
-  Redirect
+  // Redirect
 } from 'react-router-dom';
 import PrivateRoute from "./PrivateRoute";
 
@@ -24,7 +24,7 @@ import TokenContext from "./tokenContext";
  *    - Uses Home, Companies, Company, Jobs, Login, and Profile Components */
 
 function Routes() {
-  const { token, user } = useContext(TokenContext);
+  // const { token, user } = useContext(TokenContext);
 
   return (
     <Switch>

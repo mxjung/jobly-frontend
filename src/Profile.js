@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, useCallback} from 'react';
+import React, {useState, useContext, useCallback} from 'react';
 import './Profile.css';
 import JoblyApi from './JoblyApi';
 import TokenContext from "./tokenContext";
@@ -18,13 +18,13 @@ function Profile() {
     { input: "photo_url", label: "Photo Url" },
     { input: "password", label: "Re-enter Password" }
   ];
-  
+
   const {user, setUser} = useContext(TokenContext);
-  
-  const INITIAL_FIELDS = {first_name: user.first_name, 
-                          last_name: user.last_name, 
-                          email: user.email, 
-                          password: "", 
+
+  const INITIAL_FIELDS = {first_name: user.first_name,
+                          last_name: user.last_name,
+                          email: user.email,
+                          password: "",
                           photo_url: user.photo_url};
 
   const [formData, setFormData] = useState({ ...INITIAL_FIELDS });
