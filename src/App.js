@@ -9,7 +9,7 @@ import TokenContext from "./tokenContext";
 import UserContext from "./userContext";
 
 
-/** App: Component that renders home page with description of Jobly and depending 
+/** App: Component that renders home page with description of Jobly and depending
  *  on token status, either a Login button (if it doesn't exist), or a 'welcome back' message
  *    - Holds state of token and username
  *    - Provider of TokenContext is located here
@@ -27,7 +27,7 @@ function App() {
     console.log("effect in app ran");
     localStorage.setItem('token', token);
 
-    if (token !== null) {
+    if (token !== 'null') {
       let payload = jwt.decode(token);
       let updatedUsername = payload.username;
 
@@ -50,7 +50,7 @@ function App() {
     setRequestCompleted(true);
   }, [token]);
 
-  // ********* browserroute in index not app. 
+  // ********* browserroute in index not app.
   return (
     <div>
       <TokenContext.Provider value={{ token, setToken, user, setUser }}>

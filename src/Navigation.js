@@ -10,7 +10,7 @@ import TokenContext from "./tokenContext";
 
 function Navigation() {
 
-  const { user } = useContext(TokenContext);
+  const { user, setToken } = useContext(TokenContext);
 
   // function that returns correct navbar based on value of token
   function returnCorrectNav() {
@@ -37,7 +37,7 @@ function Navigation() {
               </NavLink>
             </li>
             <li className="Navigation nav-item">
-              <NavLink to="#" onClick={}>
+              <NavLink to="#" onClick={() => setToken('null')}>
                 Log out
                 {/* write logic to logout (pass in from app as prop to navigation) *********** */}
               </NavLink>
