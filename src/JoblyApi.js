@@ -13,7 +13,8 @@ class JoblyApi {
     // NOTE: If you are in local mode, use localhost as BASE_URL
     // If connecting to heroku, use herokuapp url
 
-    const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+    // const BASE_URL = 'http://localhost:3001';
+    const BASE_URL = 'https://jobly-server.herokuapp.com';
 
     try {
       return (await axios({
